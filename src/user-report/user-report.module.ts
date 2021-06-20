@@ -1,4 +1,16 @@
-import { Module } from '@nestjs/common';
+import { Module } from '@nestjs/common'
+import { CoreModule } from '../core'
+import { UserReportService } from './services'
+import { UserReportController } from './user-report.controller'
 
-@Module({})
+@Module({
+  imports: [CoreModule],
+  providers: [
+    {
+      provide: 'Report',
+      useClass: UserReportService,
+    },
+  ],
+  controllers: [UserReportController],
+})
 export class UserReportModule {}

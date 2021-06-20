@@ -1,34 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { PaymentReportService } from './payment-report.service';
-import { CreatePaymentReportDto } from './dto/create-payment-report.dto';
-import { UpdatePaymentReportDto } from './dto/update-payment-report.dto';
+import { Controller, Post, Inject } from '@nestjs/common'
+import { CoreService, Report } from '../core'
 
 @Controller('payment-report')
 export class PaymentReportController {
-  constructor(private readonly paymentReportService: PaymentReportService) {}
+  constructor(
+    private readonly coreService: CoreService,
+    @Inject('Report')
+    private report: Report,
+  ) {}
 
   @Post()
-  create(@Body() createPaymentReportDto: CreatePaymentReportDto) {
-    return this.paymentReportService.create(createPaymentReportDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.paymentReportService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.paymentReportService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePaymentReportDto: UpdatePaymentReportDto) {
-    return this.paymentReportService.update(+id, updatePaymentReportDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.paymentReportService.remove(+id);
+  async shareReport(): Promise<void> {
+    await this.coreService.shareReport(this.report, 'john.doe@gmail.com', 'jane.doe@gmail.com')
   }
 }
