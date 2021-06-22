@@ -1,8 +1,4 @@
 import { Module } from '@nestjs/common'
-import { CoreService } from './services'
 
-@Module({
-  providers: [CoreService],
-  exports: [CoreService],
-})
+@Module({})
 export class CoreModule {}
