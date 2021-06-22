@@ -1,6 +1,7 @@
+import { AbstractReportService } from '@/core'
 import { Test, TestingModule } from '@nestjs/testing'
 import { PaymentReportController } from './payment-report.controller'
-import { PaymentReportService } from './payment-report.service'
+import { PaymentReportService } from './services'
 
 describe('PaymentReportController', () => {
   let controller: PaymentReportController
@@ -8,7 +9,13 @@ describe('PaymentReportController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [PaymentReportController],
-      providers: [PaymentReportService],
+      providers: [
+        PaymentReportService,
+        {
+          provide: AbstractReportService,
+          useValue: {},
+        },
+      ],
     }).compile()
 
     controller = module.get<PaymentReportController>(PaymentReportController)
