@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common'
-import { CoreModule } from '../core'
+import { AbstractReportService, CoreModule } from '../core'
 import { UserReportService } from './services'
 import { UserReportController } from './user-report.controller'
 
@@ -7,7 +7,7 @@ import { UserReportController } from './user-report.controller'
   imports: [CoreModule],
   providers: [
     {
-      provide: 'Report',
+      provide: AbstractReportService,
       useClass: UserReportService,
     },
   ],

@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common'
 import { PaymentReportService } from './services'
 import { PaymentReportController } from './payment-report.controller'
-import { CoreModule } from '../core'
+import { AbstractReportService, CoreModule } from '@/core'
 
 @Module({
   imports: [CoreModule],
   controllers: [PaymentReportController],
   providers: [
     {
-      provide: 'Report',
+      provide: AbstractReportService,
       useClass: PaymentReportService,
     },
   ],

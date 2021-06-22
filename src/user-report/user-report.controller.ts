@@ -1,13 +1,9 @@
-import { Controller, Inject, Post } from '@nestjs/common'
-import { CoreService, Report } from '../core'
+import { Controller, Post } from '@nestjs/common'
+import { AbstractReportService, CoreService } from '@/core'
 
 @Controller('user-report')
 export class UserReportController {
-  constructor(
-    private readonly coreService: CoreService,
-    @Inject('Report')
-    private report: Report,
-  ) {}
+  constructor(private readonly coreService: CoreService, private report: AbstractReportService) {}
 
   @Post()
   async shareReport(): Promise<void> {

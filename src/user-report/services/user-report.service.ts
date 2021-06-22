@@ -1,13 +1,9 @@
 import { Injectable } from '@nestjs/common'
+import { AbstractReportService } from '@/core'
 
 @Injectable()
-export class UserReportService {
+export class UserReportService extends AbstractReportService {
   async export(): Promise<Buffer> {
     return Buffer.from('Export in user report service')
-  }
-
-  sendEmail(buffer: Buffer, ...emails: string[]): void {
-    console.log('buffer: ', buffer.toString('utf-8'))
-    console.log('send user report to emails:', emails)
   }
 }
