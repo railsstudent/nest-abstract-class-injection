@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common'
 import { PaymentReportService } from './services'
 import { PaymentReportController } from './payment-report.controller'
-import { AbstractReportService, CoreModule } from '@/core'
+import { AbstractReportService } from '@/core'
 
 @Module({
-  imports: [CoreModule],
   controllers: [PaymentReportController],
   providers: [
     {
